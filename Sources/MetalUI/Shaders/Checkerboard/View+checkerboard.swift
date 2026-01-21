@@ -11,21 +11,34 @@ public extension View {
     func checkerboard(checkSize: CGFloat = 20, opacity: CGFloat = 0.3, reverse: Bool = false) -> some View {
         modifier(
             CheckerboardShaderModifier(checkSize: checkSize,
-                                       opacity: opacity,
+                                       secondColor: .opacity(opacity),
+                                       reverse: reverse)
+        )
+    }
+
+    func checkerboard(checkSize: CGFloat = 20, secondColor: Color, reverse: Bool = false) -> some View {
+        modifier(
+            CheckerboardShaderModifier(checkSize: checkSize,
+                                       secondColor: .color(secondColor),
                                        reverse: reverse)
         )
     }
 }
 
 struct CheckerboardShaderModifier: ViewModifier {
-    let checkSize: CGFloat
-    let opacity: CGFloat
-    let reverse: Bool
+    var checkSize: CGFloat
+    var secondColor: CheckerboardShader.ColorConfiguration
+
+    var reverse: Bool
 
     func body(content: Content) -> some View {
-        content.shaderEffect(
-            CheckerboardShader(checkSize: checkSize, opacity: opacity, reverse: reverse)
-        )
+        content.shaderEffect(shader)
+    }
+}
+
+extension CheckerboardShaderModifier {
+    private var shader: CheckerboardShader {
+        .init(checkSize: checkSize, secondColor: secondColor, reverse: reverse)
     }
 }
 
@@ -34,8 +47,8 @@ struct CheckerboardShaderModifier: ViewModifier {
     VStack {
         RoundedRectangle(cornerRadius: 44)
             .fill(Color.indigo.gradient)
-            .frame(width: 200, height: 150)
-            .checkerboard(reverse: reverse)
+            .frame(width: 133, height: 150)
+            .checkerboard(secondColor: .red, reverse: reverse)
         Button("Toggle") {
             reverse.toggle()
         }
