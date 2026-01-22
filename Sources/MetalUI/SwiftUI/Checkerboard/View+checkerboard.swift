@@ -7,17 +7,6 @@
 
 import SwiftUI
 
-extension ViewValue where BaseType == CGFloat {
-    func convertToSize() -> ViewValue<CGSize> {
-        switch self {
-        case let .fixed(value):
-            return .fixed(.init(width: value, height: value))
-        case let .dynamic(value):
-            return .dynamic(.init(width: value, height: value))
-        }
-    }
-}
-
 public extension View {
     func checkerboard(checkSize: ViewValue<CGFloat> = .fixed(20),
                       origin: UnitPoint = .center,

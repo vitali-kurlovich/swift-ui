@@ -26,12 +26,9 @@ extension CheckerboardShader: ColorEffectShaderProvider {
     }
 
     func shader(_: GeometryProxy) -> Shader {
-        // let size = proxy.size
-        // let size = proxy.frame(in: .local).size
-
         let size = checkSize
         let offset = CGSize(width: size.width * origin.x, height: size.height * origin.y)
-        debugPrint(offset)
+
         switch secondColor {
         case let .color(color):
             return Shader(
