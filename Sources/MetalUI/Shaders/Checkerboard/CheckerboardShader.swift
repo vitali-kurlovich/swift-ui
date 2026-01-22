@@ -13,10 +13,11 @@ struct CheckerboardShader: Sendable, Equatable {
         case color(SwiftUI.Color)
     }
 
-    var checkSize: CGFloat
+    var checkSize: CGSize
+    var origin: UnitPoint
     var secondColor: ColorConfiguration
-
     var reverse: Bool
+    var displayScale: CGFloat
 }
 
 extension CheckerboardShader: ColorEffectShaderProvider {
@@ -25,21 +26,31 @@ extension CheckerboardShader: ColorEffectShaderProvider {
     }
 
     func shader(_: GeometryProxy) -> Shader {
+        // let size = proxy.size
+        // let size = proxy.frame(in: .local).size
+
+        let size = checkSize
+        let offset = CGSize(width: size.width * origin.x, height: size.height * origin.y)
+        debugPrint(offset)
         switch secondColor {
         case let .color(color):
             return Shader(
                 function: shaderFunction(for: reverse ? "checkerboardColoredReverse" : "checkerboardColored"),
                 arguments: [
+                    .float2(offset),
+                    .float2(checkSize),
                     .color(color),
-                    .float(checkSize),
+                    .float(displayScale),
                 ]
             )
         case let .opacity(opacity):
             return Shader(
                 function: shaderFunction(for: reverse ? "checkerboardReverse" : "checkerboard"),
                 arguments: [
-                    .float(checkSize),
+                    .float2(offset),
+                    .float2(checkSize),
                     .float(opacity),
+                    .float(displayScale),
                 ]
             )
         }
