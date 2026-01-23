@@ -5,8 +5,8 @@
 //  Created by Vitali Kurlovich on 22.01.26.
 //
 
-import VisualEffects
 import SwiftUI
+import VisualEffects
 
 public struct Checkerboard: View, Equatable {
     private let firstColor: Color

@@ -5,8 +5,8 @@
 //  Created by Vitali Kurlovich on 21.01.26.
 //
 
-import VisualEffects
 import SwiftUI
+import VisualEffects
 
 public extension View {
     func checkerboard(checkSize: ViewValue<CGFloat> = .fixed(20),

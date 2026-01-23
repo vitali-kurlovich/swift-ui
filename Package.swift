@@ -3,8 +3,6 @@
 
 import PackageDescription
 
-// SwiftUIControlsKit
-
 let package = Package(
     name: "swift-ui",
     platforms: [
@@ -25,7 +23,6 @@ let package = Package(
             targets: ["SwiftUIKit"]
         ),
 
-        //
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
