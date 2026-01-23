@@ -5,6 +5,7 @@
 //  Created by Vitali Kurlovich on 21.01.26.
 //
 
+import VisualEffects
 import SwiftUI
 
 public extension View {

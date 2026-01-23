@@ -5,6 +5,7 @@
 //  Created by Vitali Kurlovich on 22.01.26.
 //
 
+import VisualEffects
 import SwiftUI
 
 public struct Checkerboard: View, Equatable {

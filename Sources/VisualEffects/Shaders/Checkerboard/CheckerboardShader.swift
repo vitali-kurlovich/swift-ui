@@ -7,25 +7,33 @@
 
 import SwiftUI
 
-struct CheckerboardShader: Sendable, Equatable {
-    enum ColorConfiguration: Equatable {
+public struct CheckerboardShader: Sendable, Equatable {
+    public enum ColorConfiguration: Equatable, Sendable {
         case opacity(CGFloat)
         case color(SwiftUI.Color)
     }
 
-    var checkSize: CGSize
-    var origin: UnitPoint
-    var secondColor: ColorConfiguration
-    var reverse: Bool
-    var displayScale: CGFloat
+    public var checkSize: CGSize
+    public var origin: UnitPoint
+    public var secondColor: ColorConfiguration
+    public var reverse: Bool
+    public var displayScale: CGFloat
+
+    public init(checkSize: CGSize, origin: UnitPoint, secondColor: ColorConfiguration, reverse: Bool, displayScale: CGFloat) {
+        self.checkSize = checkSize
+        self.origin = origin
+        self.secondColor = secondColor
+        self.reverse = reverse
+        self.displayScale = displayScale
+    }
 }
 
 extension CheckerboardShader: ColorEffectShaderProvider {
-    var shaderLibrary: ShaderLibrary {
+    public var shaderLibrary: ShaderLibrary {
         ShaderLibrary.bundle(Bundle.module)
     }
 
-    func shader(_: GeometryProxy) -> Shader {
+    public func shader(_: GeometryProxy) -> Shader {
         let size = checkSize
         let offset = CGSize(width: size.width * origin.x, height: size.height * origin.y)
 

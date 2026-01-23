@@ -3,8 +3,10 @@
 
 import PackageDescription
 
+// SwiftUIControlsKit
+
 let package = Package(
-    name: "swift-metalui",
+    name: "swift-ui",
     platforms: [
         .macOS(.v14),
         .iOS(.v17),
@@ -12,18 +14,34 @@ let package = Package(
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
+
         .library(
-            name: "MetalUI",
-            targets: ["MetalUI"]
+            name: "VisualEffects",
+            targets: ["VisualEffects"]
         ),
+
+        .library(
+            name: "SwiftUIKit",
+            targets: ["SwiftUIKit"]
+        ),
+
+        //
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "MetalUI",
+            name: "VisualEffects",
+
             resources: [
                 .process("Metal/"),
+            ]
+        ),
+
+        .target(
+            name: "SwiftUIKit",
+            dependencies: [
+                "VisualEffects",
             ]
         ),
     ]
