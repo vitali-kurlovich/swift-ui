@@ -85,23 +85,22 @@ private extension Gradient {
     private static func system(with color: NativeColor) -> Self {
         let second: NativeColor
         #if canImport(UIKit)
-        if #available(iOS 18.0, *) {
-             second = color.withProminence(.quaternary)
-        } else {
-            second = color.withAlphaComponent(0.2)
-        }
+            if #available(iOS 18.0, *) {
+                second = color.withProminence(.quaternary)
+            } else {
+                second = color.withAlphaComponent(0.2)
+            }
         #endif
         #if canImport(AppKit)
-             second = color.withAlphaComponent(0.2)
+            second = color.withAlphaComponent(0.2)
         #endif
-        
+
         return .init(colors: [Color(color), Color(second)])
     }
 }
 
 #Preview {
     VStack(spacing: 2) {
-        
         LinearGradient(gradient: .systemRed, startPoint: .leading, endPoint: .trailing)
 
         LinearGradient(gradient: .systemGreen, startPoint: .leading, endPoint: .trailing)

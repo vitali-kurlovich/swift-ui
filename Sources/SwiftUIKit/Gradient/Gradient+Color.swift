@@ -9,8 +9,7 @@ import SwiftUI
 
 @available(iOS 18.0, *)
 @available(macOS 15.0, *)
-extension Gradient {
-    public
+public extension Gradient {
     func interpolated(at position: CGFloat) -> Color {
         var iterator = stops.makeIterator()
 
@@ -34,8 +33,7 @@ extension Gradient {
     }
 }
 
-extension Gradient {
-    public
+public extension Gradient {
     func containsTransparent(_ environment: EnvironmentValues) -> Bool {
         stops.contains {
             $0.color.resolve(in: environment).opacity < 1.0
