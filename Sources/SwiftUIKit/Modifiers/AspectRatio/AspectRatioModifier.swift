@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct AspectRatioModifier: ViewModifier, Equatable {
+public nonisolated struct AspectRatioModifier: ViewModifier, Equatable, Sendable {
     public let aspectRatio: CGFloat
 
     public init(aspectRatio: CGFloat) {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 public extension View {
-    func frame(aspectRatio: CGFloat) -> some View {
+    nonisolated func frame(aspectRatio: CGFloat) -> some View {
         modifier(AspectRatioModifier(aspectRatio: aspectRatio))
     }
 }
@@ -18,5 +18,4 @@ public extension View {
         .border(.green)
         .frame(aspectRatio: 1)
         .border(.red)
-    
 }
