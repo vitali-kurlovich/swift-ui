@@ -14,11 +14,13 @@ public struct ExpandableViewStyleConfiguration {
 }
 
 public extension ExpandableViewStyleConfiguration {
+    typealias Label = ButtonStyleConfiguration.Label
+
     var isPressed: Bool {
         configuration.isPressed
     }
 
-    var label: ButtonStyleConfiguration.Label {
+    var label: Label {
         configuration.label
     }
 }

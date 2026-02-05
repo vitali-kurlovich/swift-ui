@@ -15,9 +15,9 @@ protocol ExpandableViewDisclosureIndicator {
 
 struct DefaultDisclosureIndicator: ExpandableViewDisclosureIndicator {
     func makeBody(configuration: ExpandableViewStyleConfiguration) -> some View {
-        AspectRatioLayout(aspectRatio: 1) {
-            Image(systemName: "chevron.forward")
-        }.padding(4)
+        Image(systemName: "chevron.forward")
+            .frame(aspectRatio: 1)
+            .padding(4)
             .rotationEffect(configuration.state == .expanded ? .degrees(90) : .degrees(0))
             .background {
                 Circle().fill(.ultraThinMaterial)
