@@ -19,6 +19,12 @@ struct DefaultExpandableViewHeader: ExpandableViewHeader {
     }
 }
 
+struct ExpandableViewHeaderContent<LabelContent, DisclosureIndicator>: ExpandableViewHeader {
+    func makeBody(configuration: ExpandableViewStyleConfiguration) -> some View {
+        configuration.label.opacity(configuration.isPressed ? 0.3 : 1.0)
+    }
+}
+
 #Preview {
     @Previewable @State var state: ExpandableState = .compressed
     ZStack {
