@@ -2,68 +2,86 @@
 //  DisclosureIndicatorWithBackgroundStyle.swift
 //  swift-ui
 //
-//  Created by Vitali Kurlovich on 5.02.26.
+//  Created by Vitali Kurlovich on 9.02.26.
 //
 
 import SwiftUI
 
-public protocol FilledDisclosureIndicatorStyle: DisclosureIndicatorStyle {
-    associatedtype BaseStyle: DisclosureIndicatorStyle
-    associatedtype FillStyle: ShapeStyle
+struct DisclosureIndicatorWithBackgroundStyle<Background: View>: DisclosureIndicatorStyle {
+    let padding: CGFloat
+    let background: () -> Background
 
-    var baseStyle: BaseStyle { get }
-    var fillStyle: FillStyle { get }
+    init(padding: CGFloat, @ViewBuilder background: @escaping () -> Background) {
+        self.padding = padding
+        self.background = background
+    }
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.indicator
+            .rotationEffect(rotation(for: configuration))
+            .frame(aspectRatio: 1)
+            .padding(padding)
+            .background {
+                background()
+            }
+    }
 }
 
-public struct DisclosureIndicatorWithBackgroundStyle<BaseStyle: DisclosureIndicatorStyle, FillStyle: ShapeStyle>: FilledDisclosureIndicatorStyle {
-    public let baseStyle: BaseStyle
-    public let fillStyle: FillStyle
+struct IndicatorCircleBackgroundStyle<FillStyle: ShapeStyle>: DisclosureIndicatorStyle {
+    let padding: CGFloat
+    let fillStyle: FillStyle
 
-    public init(baseStyle: BaseStyle, fillStyle: FillStyle) {
-        self.baseStyle = baseStyle
+    init(padding: CGFloat = 2, fillStyle: FillStyle) {
+        self.padding = padding
         self.fillStyle = fillStyle
     }
 
-    public func makeBody(configuration: Configuration) -> some View {
-        baseStyle.makeBody(configuration: configuration)
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.indicator
+            .rotationEffect(rotation(for: configuration))
+            .frame(aspectRatio: 1)
+            .padding(padding)
             .background {
                 Circle().fill(fillStyle)
             }
     }
 }
 
-extension DisclosureIndicatorWithBackgroundStyle: Equatable where BaseStyle: Equatable, FillStyle: Equatable {}
-
-public extension DisclosureIndicatorStyle where Self == DisclosureIndicatorWithBackgroundStyle<SymbolDisclosureIndicatorStyle, Material> {
-    @MainActor static var chevronUltraThin: some DisclosureIndicatorStyle {
-        DisclosureIndicatorWithBackgroundStyle(baseStyle: .chevron, fillStyle: .ultraThinMaterial)
-    }
-}
-
-public extension DisclosureIndicatorStyle where Self == DisclosureIndicatorWithBackgroundStyle<SymbolDisclosureIndicatorStyle, Color> {
-    @MainActor static func chevron(with color: Color) -> Self {
-        DisclosureIndicatorWithBackgroundStyle(baseStyle: .chevron, fillStyle: color)
+extension DisclosureIndicatorStyle where Self == IndicatorCircleBackgroundStyle<Material> {
+    @MainActor static var ultraThinCircle: Self { IndicatorCircleBackgroundStyle(fillStyle: .ultraThin)
     }
 }
 
 #Preview {
-    @Previewable @State var configuration: DisclosureIndicatorConfiguration = .init(isExpanded: false, isPressed: false)
+    @Previewable @State var isExpanded = false
 
     VStack {
         HStack {
-            DisclosureIndicator(style: .chevronUltraThin, configuration: configuration)
-
-            DisclosureIndicator(style: .chevron(with: .indigo), configuration: configuration)
-
-            DisclosureIndicator(style: .chevron.fill(.pink), configuration: configuration)
+            DisclosureIndicator(isExpanded: isExpanded)
+            DisclosureIndicator(isExpanded: isExpanded, .chevronCircle)
         }
+        Spacer()
+        HStack {
+            DisclosureIndicator(isExpanded: isExpanded)
+
+            DisclosureIndicator(isExpanded: isExpanded)
+                .disclosureIndicatorStyle(DisclosureIndicatorWithBackgroundStyle(padding: 4, background: {
+                    RoundedRectangle(cornerRadius: 6)
+                        .fill(LinearGradient(gradient: .systemRainbow, startPoint: .bottom, endPoint: .top))
+                }))
+
+            DisclosureIndicator(isExpanded: isExpanded)
+                .disclosureIndicatorStyle(IndicatorCircleBackgroundStyle(fillStyle: Color.red.gradient))
+
+            DisclosureIndicator(isExpanded: isExpanded, .chevronCircleFill)
+                .disclosureIndicatorStyle(IndicatorCircleBackgroundStyle(fillStyle: .checkerboard(.small(), first: .pink, second: .mint)))
+                .dynamicTypeSize(.accessibility2)
+
+        }.disclosureIndicatorStyle(.ultraThinCircle)
         Form {
             Section {
                 Group {
-                    Toggle("isExpanded", isOn: $configuration.isExpanded.animation())
-
-                    Toggle("isPressed", isOn: $configuration.isPressed.animation())
-
+                    Toggle("isExpanded", isOn: $isExpanded.animation())
                 }.toggleStyle(.button)
             }
         }

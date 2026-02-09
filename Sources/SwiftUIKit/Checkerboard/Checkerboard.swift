@@ -30,6 +30,6 @@ public struct Checkerboard: View, Equatable {
 
 #Preview {
     Checkerboard(.small())
-    //  Checkerboard(.medium())
-    // Checkerboard(.large())
+    Checkerboard(.medium())
+    Checkerboard(.large())
 }
