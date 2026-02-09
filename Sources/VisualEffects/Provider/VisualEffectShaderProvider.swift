@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-public protocol VisualEffectShaderProvider {
+public protocol VisualEffectShaderProvider: Sendable {
     var shaderLibrary: ShaderLibrary { get }
 
-    func shader(_ proxy: GeometryProxy) -> Shader
+    func shader() -> Shader
 }
 
 public extension VisualEffectShaderProvider {
@@ -22,6 +22,10 @@ public extension VisualEffectShaderProvider {
         assert(!name.isEmpty)
 
         return ShaderFunction(library: shaderLibrary, name: name)
+    }
+
+    func shader(_: GeometryProxy) -> Shader {
+        shader()
     }
 }
 

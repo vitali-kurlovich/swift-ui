@@ -9,6 +9,8 @@ import SwiftUI
 import VisualEffects
 
 public struct Checkerboard: View, Equatable {
+    public typealias Configuration = CheckerboardConfiguration
+
     private let firstColor: Color
     private let secondColor: Color
 
@@ -21,52 +23,13 @@ public struct Checkerboard: View, Equatable {
     }
 
     public var body: some View {
-        firstColor.checkerboard(checkSize: configuration.checkSize,
-                                origin: configuration.origin,
+        firstColor.checkerboard(configuration,
                                 secondColor: secondColor)
-    }
-}
-
-public extension Checkerboard {
-    struct Configuration: Equatable, Sendable {
-        public let size: CGFloat
-        public let origin: UnitPoint
-        public let dynamicSize: Bool
-
-        public init(size: CGFloat, origin: UnitPoint = .center, dynamicSize: Bool = false) {
-            self.size = size
-            self.origin = origin
-            self.dynamicSize = dynamicSize
-        }
-    }
-}
-
-public extension Checkerboard.Configuration {
-    static func small(_ dynamic: Bool = true) -> Self {
-        .init(size: 6, dynamicSize: dynamic)
-    }
-
-    static func medium(_ dynamic: Bool = true) -> Self {
-        .init(size: 10, dynamicSize: dynamic)
-    }
-
-    static func large(_ dynamic: Bool = true) -> Self {
-        .init(size: 16, dynamicSize: dynamic)
-    }
-}
-
-private extension Checkerboard.Configuration {
-    var checkSize: ViewValue<CGSize> {
-        if dynamicSize {
-            return .dynamic(.init(width: size, height: size))
-        }
-
-        return .fixed(.init(width: size, height: size))
     }
 }
 
 #Preview {
     Checkerboard(.small())
-    Checkerboard(.medium())
-    Checkerboard(.large())
+    //  Checkerboard(.medium())
+    // Checkerboard(.large())
 }

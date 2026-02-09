@@ -5,6 +5,8 @@
 //  Created by Vitali Kurlovich on 22.01.26.
 //
 
+// import Foundation
+
 public enum ViewValue<BaseType: Equatable> {
     case fixed(_ value: BaseType)
     case dynamic(_ value: BaseType)

@@ -9,69 +9,36 @@ import SwiftUI
 import VisualEffects
 
 public extension View {
-    func checkerboard(checkSize: ViewValue<CGFloat> = .fixed(20),
-                      origin: UnitPoint = .center,
-                      opacity: CGFloat = 0.3,
-                      reverse: Bool = false) -> some View
-    {
-        checkerboard(checkSize: checkSize.convertToSize(), origin: origin,
-                     opacity: opacity,
-                     reverse: reverse)
-    }
-
-    func checkerboard(checkSize: ViewValue<CGSize>,
-                      origin: UnitPoint = .center,
+    func checkerboard(_ configuration: CheckerboardConfiguration = .medium(),
                       opacity: CGFloat = 0.3,
                       reverse: Bool = false) -> some View
     {
         modifier(
-            CheckerboardShaderModifier(checkSize: checkSize,
-                                       origin: origin,
+            CheckerboardShaderModifier(configuration: configuration,
                                        secondColor: .opacity(opacity),
-
                                        reverse: reverse)
         )
     }
 
-    func checkerboard(checkSize: ViewValue<CGFloat> = .fixed(20),
-                      origin: UnitPoint = .center,
+    func checkerboard(_ configuration: CheckerboardConfiguration = .medium(),
                       secondColor: Color, reverse: Bool = false) -> some View
     {
         modifier(
-            CheckerboardShaderModifier(checkSize: checkSize.convertToSize(),
-                                       origin: origin,
+            CheckerboardShaderModifier(configuration: configuration,
                                        secondColor: .color(secondColor),
-
-                                       reverse: reverse)
-        )
-    }
-
-    func checkerboard(checkSize: ViewValue<CGSize>,
-                      origin: UnitPoint = .center,
-                      secondColor: Color, reverse: Bool = false) -> some View
-    {
-        modifier(
-            CheckerboardShaderModifier(checkSize: checkSize,
-                                       origin: origin,
-                                       secondColor: .color(secondColor),
-
                                        reverse: reverse)
         )
     }
 }
 
 struct CheckerboardShaderModifier: ViewModifier {
-    @ScaledMetric
-    private var scaledFactor: CGFloat = 1
+    typealias Configuration = CheckerboardConfiguration
 
-    @Environment(\.displayScale)
-    private var displayScale: CGFloat
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
 
-    var checkSize: ViewValue<CGSize>
-    var origin: UnitPoint
-    var secondColor: CheckerboardShader.ColorConfiguration
-
-    var reverse: Bool
+    let configuration: Configuration
+    let secondColor: CheckerboardShader.ColorConfiguration
+    let reverse: Bool
 
     func body(content: Content) -> some View {
         content.shaderEffect(shader)
@@ -80,26 +47,26 @@ struct CheckerboardShaderModifier: ViewModifier {
 
 extension CheckerboardShaderModifier {
     private var shader: CheckerboardShader {
-        let checkSize: CGSize
-        switch self.checkSize {
-        case let .fixed(value):
-            checkSize = value
-        case let .dynamic(value):
-            checkSize = .init(width: value.width * scaledFactor,
-                              height: value.height * scaledFactor)
-        }
+        let checkSize = configuration.resolveSize(dynamicTypeSize)
+        let origin = configuration.origin
 
         return .init(checkSize: checkSize,
                      origin: origin,
                      secondColor: secondColor,
-                     reverse: reverse,
-                     displayScale: displayScale)
+                     reverse: reverse)
     }
 }
 
 #Preview {
     @Previewable @State var reverse = false
     VStack {
+        Image(systemName: "rainbow")
+            .renderingMode(.original)
+            .resizable()
+            .symbolEffect(.variableColor.iterative, options: .repeating)
+            .frame(width: 200, height: 110)
+            .checkerboard(.small(), opacity: 0.3)
+
         RoundedRectangle(cornerRadius: 6)
             .fill(Color.indigo.gradient)
             .frame(width: 20 * 9, height: 20 * 6 + 4)
@@ -108,7 +75,7 @@ extension CheckerboardShaderModifier {
         RoundedRectangle(cornerRadius: 6)
             .fill(Color.indigo.gradient)
             .frame(width: 20 * 9, height: 20 * 6 + 4)
-            .checkerboard(checkSize: .dynamic(20), reverse: reverse)
+            .checkerboard(.init(size: 33), reverse: reverse)
 
         Button("Toggle") {
             reverse.toggle()
