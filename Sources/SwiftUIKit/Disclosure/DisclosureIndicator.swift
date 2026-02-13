@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-// func renderingMode(_ renderingMode: Image.TemplateRenderingMode?)
-
-//
-
 struct DisclosureIndicator<Indicator: View>: View {
     @Environment(\.indicatorStyle)
     private var style
@@ -43,8 +39,15 @@ extension DisclosureIndicator where Indicator == Image {
     }
 
     init(isExpanded: Bool,
+         _ symbol: Symbol = .chevron)
+    {
+        self.init(isExpanded: isExpanded,
+                  systemName: symbol.rawValue)
+    }
+
+    init(isExpanded: Bool,
          _ symbol: Symbol = .chevron,
-         renderingMode: Image.TemplateRenderingMode? = nil)
+         renderingMode: Image.TemplateRenderingMode)
     {
         self.init(isExpanded: isExpanded,
                   systemName: symbol.rawValue,
@@ -53,16 +56,24 @@ extension DisclosureIndicator where Indicator == Image {
 
     init(isExpanded: Bool,
          systemName: String,
-         renderingMode: Image.TemplateRenderingMode? = nil)
+         renderingMode: Image.TemplateRenderingMode)
     {
         self.init(
             isExpanded: isExpanded,
             indicator: {
-                if let renderingMode {
-                    return Image(systemName: systemName)
-                        .renderingMode(renderingMode)
-                }
-                return Image(systemName: systemName)
+                Image(systemName: systemName)
+                    .renderingMode(renderingMode)
+            }
+        )
+    }
+
+    init(isExpanded: Bool,
+         systemName: String)
+    {
+        self.init(
+            isExpanded: isExpanded,
+            indicator: {
+                Image(systemName: systemName)
             }
         )
     }
