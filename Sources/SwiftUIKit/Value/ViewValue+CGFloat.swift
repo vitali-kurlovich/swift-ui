@@ -12,16 +12,28 @@ public extension ViewValue where BaseType == CGFloat {
         value(environmentValues.dynamicTypeSize)
     }
 
-    func value(_ typeSize: DynamicTypeSize) -> BaseType {
-        value(UITraitCollection(preferredContentSizeCategory: typeSize.contentSizeCategory))
-    }
+    #if canImport(UIKit)
 
-    func value(_ traitCollection: UITraitCollection) -> BaseType {
-        switch self {
-        case let .fixed(value):
-            return value
-        case let .dynamic(value):
-            return UIFontMetrics.default.scaledValue(for: value, compatibleWith: traitCollection)
+        func value(_ typeSize: DynamicTypeSize) -> BaseType {
+            value(UITraitCollection(preferredContentSizeCategory: typeSize.contentSizeCategory))
         }
-    }
+
+        func value(_ traitCollection: UITraitCollection) -> BaseType {
+            switch self {
+            case let .fixed(value):
+                return value
+            case let .dynamic(value):
+                return UIFontMetrics.default.scaledValue(for: value, compatibleWith: traitCollection)
+            }
+        }
+    #else
+        func value(_: DynamicTypeSize) -> BaseType {
+            switch self {
+            case let .fixed(value):
+                return value
+            case let .dynamic(value):
+                return value
+            }
+        }
+    #endif
 }
