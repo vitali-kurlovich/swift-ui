@@ -50,7 +50,6 @@ enum TripleState: Equatable, Sendable, CustomStringConvertible {
     }
 }
 
-@available(iOS 18.0, *)
 struct TripleStateGroupStyle: StateGroupStyle {
     typealias State = TripleState
 
@@ -77,7 +76,7 @@ struct TripleStateGroupStyle: StateGroupStyle {
     }
 }
 
-@available(iOS 18.0, *)
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 #Preview {
     @Previewable @State var state: TripleState = .compact
 

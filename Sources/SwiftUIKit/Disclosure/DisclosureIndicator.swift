@@ -89,12 +89,8 @@ extension DisclosureIndicator where Indicator == Image {
         }
         Spacer()
         HStack {
-            if #available(iOS 18.0, *) {
-                DisclosureIndicator(isExpanded: isExpanded, systemName: "sun.max.fill", renderingMode: .original)
-                    .symbolEffect(.bounce, options: .repeating)
-            } else {
-                DisclosureIndicator(isExpanded: isExpanded, systemName: "sun.max.fill", renderingMode: .original)
-            }
+            DisclosureIndicator(isExpanded: isExpanded, systemName: "sun.max.fill", renderingMode: .original)
+                .symbolEffect(.bounce, options: .repeating)
 
             DisclosureIndicator(isExpanded: isExpanded)
                 .disclosureIndicatorStyle(IndicatorCircleBackgroundStyle(fillStyle: Color.orange.secondary))
