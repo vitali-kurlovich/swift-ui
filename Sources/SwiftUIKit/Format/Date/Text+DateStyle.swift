@@ -25,13 +25,22 @@ public extension Text {
 }
 
 #Preview {
+    let fontUpdater = DateFieldInlinePresentationIntentUpdater(fields: [.year, .minute], inline: [.stronglyEmphasized])
+
+    let colorUpdater = DateFieldForegroundColorUpdater([
+        .year: .accentColor,
+        .second: .pink,
+    ])
+
+    let transform = fontUpdater.merge(with: colorUpdater)
+
     TimelineView(.periodic(from: .now, by: 1)) { context in
         Form {
             Text(context.date)
 
             Text(context.date, date: .abbreviated, time: .standard)
 
-            Text(context.date, date: .abbreviated, time: .standard, transform: DateFieldInlinePresentationIntentUpdater(fields: [.year, .minute], inline: [.stronglyEmphasized]))
+            Text(context.date, date: .abbreviated, time: .standard, transform: transform)
         }.font(.title)
     }
 }
