@@ -19,7 +19,7 @@ public struct AttributedStringTransformerStyle<FormatInput,
     public var base: BaseFormatStyle
     public var transformer: Transformer
 
-    public init(_ base: BaseFormatStyle, transformer: Transformer) {
+    @inlinable public init(_ base: BaseFormatStyle, transformer: Transformer) {
         self.base = base
         self.transformer = transformer
     }
@@ -31,8 +31,14 @@ public struct AttributedStringTransformerStyle<FormatInput,
 }
 
 public extension FormatStyle where Self.FormatOutput == AttributedString {
-    func transform<Transformer: AttributedStringTransformer>(_ transformer: Transformer) -> AttributedStringTransformerStyle<Self.FormatInput, Self, Transformer> {
+    @inlinable func transform<Transformer: AttributedStringTransformer>(_ transformer: Transformer) -> AttributedStringTransformerStyle<Self.FormatInput, Self, Transformer> {
         AttributedStringTransformerStyle(self, transformer: transformer)
+    }
+}
+
+public extension FormatStyle where Self.FormatOutput == AttributedString {
+    @inlinable func transform<Updater: AttributedStringUpdater>(_ updater: Updater) -> AttributedStringTransformerStyle<Self.FormatInput, Self, AttributedStringUpdateTransformer<Updater>> {
+        AttributedStringTransformerStyle(self, transformer: updater.transformer())
     }
 }
 
@@ -45,6 +51,10 @@ public extension Text {
     ///     of type `F.FormatInput` to an attributed string representation.
     ///   - transform: Transform AttributedString
     @inlinable init<F, T>(_ input: F.FormatInput, format: F, transform: T) where F: FormatStyle, F.FormatInput: Equatable, F.FormatOutput == AttributedString, T: AttributedStringTransformer {
+        self.init(input, format: format.transform(transform))
+    }
+
+    @inlinable init<F, U>(_ input: F.FormatInput, format: F, transform: U) where F: FormatStyle, F.FormatInput: Equatable, F.FormatOutput == AttributedString, U: AttributedStringUpdater {
         self.init(input, format: format.transform(transform))
     }
 }
