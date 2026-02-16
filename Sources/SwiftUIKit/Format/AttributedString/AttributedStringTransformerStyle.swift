@@ -1,0 +1,50 @@
+//
+//  AttributedStringTransformerStyle.swift
+//  swift-ui
+//
+//  Created by Vitali Kurlovich on 15.02.26.
+//
+
+import SwiftUI
+
+public struct AttributedStringTransformerStyle<FormatInput,
+    BaseFormatStyle: FormatStyle,
+    Transformer: AttributedStringTransformer>: FormatStyle
+    where
+    BaseFormatStyle.FormatInput == FormatInput,
+    BaseFormatStyle.FormatOutput == AttributedString
+{
+    public typealias FormatOutput = AttributedString
+
+    public var base: BaseFormatStyle
+    public var transformer: Transformer
+
+    public init(_ base: BaseFormatStyle, transformer: Transformer) {
+        self.base = base
+        self.transformer = transformer
+    }
+
+    public func format(_ value: FormatInput) -> AttributedString {
+        let attrString = base.format(value)
+        return transformer.transform(attrString)
+    }
+}
+
+public extension FormatStyle where Self.FormatOutput == AttributedString {
+    func transform<Transformer: AttributedStringTransformer>(_ transformer: Transformer) -> AttributedStringTransformerStyle<Self.FormatInput, Self, Transformer> {
+        AttributedStringTransformerStyle(self, transformer: transformer)
+    }
+}
+
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+public extension Text {
+    ///
+    /// - Parameters:
+    ///   - input: The underlying value to display.
+    ///   - format: A format style of type `F` to convert the underlying value
+    ///     of type `F.FormatInput` to an attributed string representation.
+    ///   - transform: Transform AttributedString
+    @inlinable init<F, T>(_ input: F.FormatInput, format: F, transform: T) where F: FormatStyle, F.FormatInput: Equatable, F.FormatOutput == AttributedString, T: AttributedStringTransformer {
+        self.init(input, format: format.transform(transform))
+    }
+}
