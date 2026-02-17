@@ -23,7 +23,7 @@ public struct AttributedStringModifierTransformer<M: AttributedStringModifier>: 
 }
 
 public extension AttributedStringTransformer {
-    func merge<M: AttributedStringModifier>(with modifier: M) -> some AttributedStringTransformer {
+    func merge<M: AttributedStringModifier>(with modifier: M) -> AttributedStringModifierTransformer<M> {
         AttributedStringModifierTransformer(modifier)
     }
 }
