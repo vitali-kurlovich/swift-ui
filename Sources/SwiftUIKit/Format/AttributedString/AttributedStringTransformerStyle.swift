@@ -1,7 +1,4 @@
 //
-//  AttributedStringTransformerStyle.swift
-//  swift-ui
-//
 //  Created by Vitali Kurlovich on 15.02.26.
 //
 
@@ -37,24 +34,18 @@ public extension FormatStyle where Self.FormatOutput == AttributedString {
 }
 
 public extension FormatStyle where Self.FormatOutput == AttributedString {
-    @inlinable func transform<Updater: AttributedStringUpdater>(_ updater: Updater) -> AttributedStringTransformerStyle<Self.FormatInput, Self, AttributedStringUpdateTransformer<Updater>> {
+    @inlinable func transform<Updater: AttributedStringModifier>(_ updater: Updater) -> AttributedStringTransformerStyle<Self.FormatInput, Self, AttributedStringModifierTransformer<Updater>> {
         AttributedStringTransformerStyle(self, transformer: updater.transformer())
     }
 }
 
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 public extension Text {
-    ///
-    /// - Parameters:
-    ///   - input: The underlying value to display.
-    ///   - format: A format style of type `F` to convert the underlying value
-    ///     of type `F.FormatInput` to an attributed string representation.
-    ///   - transform: Transform AttributedString
     @inlinable init<F, T>(_ input: F.FormatInput, format: F, transform: T) where F: FormatStyle, F.FormatInput: Equatable, F.FormatOutput == AttributedString, T: AttributedStringTransformer {
         self.init(input, format: format.transform(transform))
     }
 
-    @inlinable init<F, U>(_ input: F.FormatInput, format: F, transform: U) where F: FormatStyle, F.FormatInput: Equatable, F.FormatOutput == AttributedString, U: AttributedStringUpdater {
+    @inlinable init<F, M>(_ input: F.FormatInput, format: F, transform: M) where F: FormatStyle, F.FormatInput: Equatable, F.FormatOutput == AttributedString, M: AttributedStringModifier {
         self.init(input, format: format.transform(transform))
     }
 }

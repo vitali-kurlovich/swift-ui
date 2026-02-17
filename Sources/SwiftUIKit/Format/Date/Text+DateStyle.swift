@@ -15,24 +15,23 @@ public extension Text {
 }
 
 public extension Text {
-    @inlinable init<T>(_ input: Date, format: Date.FormatStyle, transform: T) where T: AttributedStringUpdater {
+    @inlinable init<T>(_ input: Date, format: Date.FormatStyle, transform: T) where T: AttributedStringModifier {
         self.init(input, format: format.attributedStyle, transform: transform)
     }
 
-    @inlinable init<T>(_ input: Date, date: Date.FormatStyle.DateStyle, time: Date.FormatStyle.TimeStyle, transform: T) where T: AttributedStringUpdater {
+    @inlinable init<T>(_ input: Date, date: Date.FormatStyle.DateStyle, time: Date.FormatStyle.TimeStyle, transform: T) where T: AttributedStringModifier {
         self.init(input, format: Date.FormatStyle(date: date, time: time), transform: transform)
     }
 }
 
 #Preview {
-    let fontUpdater = DateFieldInlinePresentationIntentUpdater(fields: [.year, .minute], inline: [.stronglyEmphasized])
+    let fontUpdater = DateFieldInlinePresentationIntentModifier(fields: [.year, .minute], inline: [.stronglyEmphasized])
 
-    let colorUpdater = DateFieldForegroundColorUpdater([
-        .year: .accentColor,
-        .second: .pink,
-    ])
+    let colorUpdater = DateFieldForegroundColorModifier(fields: [.year], color: .accentColor)
 
-    let transform = fontUpdater.merge(with: colorUpdater)
+    let colorUpdater2 = DateFieldForegroundColorModifier(fields: [.second], color: .pink)
+
+    let transform = fontUpdater.merge(with: colorUpdater).merge(with: colorUpdater2)
 
     TimelineView(.periodic(from: .now, by: 1)) { context in
         Form {
