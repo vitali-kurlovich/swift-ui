@@ -40,13 +40,13 @@ public extension AttributedStringModifier {
 
 public extension FormatStyle where Self.FormatInput == Date, Self.FormatOutput == AttributedString {
     @inlinable func modify(color: Color, for fields: Set<AttributeScopes.FoundationAttributes.DateFieldAttribute.Field>) ->
-        AttributedStringTransformerStyle<Date, Self, AttributedStringModifierTransformer<DateFieldForegroundColorModifier>>
+        AttributedStringTransformerStyle<Self.FormatInput, Self, AttributedStringModifierTransformer<DateFieldForegroundColorModifier>>
     {
         let modifier = DateFieldForegroundColorModifier(fields: fields, color: color)
         return AttributedStringTransformerStyle(self, transformer: modifier.transformer())
     }
 
-    @inlinable func modify(color: Color, for field: AttributeScopes.FoundationAttributes.DateFieldAttribute.Field) -> AttributedStringTransformerStyle<Date, Self, AttributedStringModifierTransformer<DateFieldForegroundColorModifier>> {
+    @inlinable func modify(color: Color, for field: AttributeScopes.FoundationAttributes.DateFieldAttribute.Field) -> AttributedStringTransformerStyle<Self.FormatInput, Self, AttributedStringModifierTransformer<DateFieldForegroundColorModifier>> {
         modify(color: color, for: [field])
     }
 }
@@ -54,14 +54,14 @@ public extension FormatStyle where Self.FormatInput == Date, Self.FormatOutput =
 public extension Date.FormatStyle {
     @inlinable func modify(color: Color, for fields: Set<AttributeScopes.FoundationAttributes.DateFieldAttribute.Field>) ->
 
-        AttributedStringTransformerStyle<Date, Self.Attributed, AttributedStringModifierTransformer<DateFieldForegroundColorModifier>>
+        AttributedStringTransformerStyle<Self.FormatInput, Self.Attributed, AttributedStringModifierTransformer<DateFieldForegroundColorModifier>>
     {
         attributedStyle.modify(color: color, for: fields)
     }
 
     @inlinable func modify(color: Color, for field: AttributeScopes.FoundationAttributes.DateFieldAttribute.Field) ->
 
-        AttributedStringTransformerStyle<Date, Self.Attributed, AttributedStringModifierTransformer<DateFieldForegroundColorModifier>>
+        AttributedStringTransformerStyle<Self.FormatInput, Self.Attributed, AttributedStringModifierTransformer<DateFieldForegroundColorModifier>>
     {
         modify(color: color, for: [field])
     }
