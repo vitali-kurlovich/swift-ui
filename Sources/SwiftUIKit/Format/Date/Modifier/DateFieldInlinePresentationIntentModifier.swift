@@ -2,7 +2,6 @@
 //  Created by Vitali Kurlovich on 16.02.26.
 //
 
-import Foundation
 import SwiftUI
 
 public struct DateFieldInlinePresentationIntentModifier: AttributedStringModifier {
@@ -22,6 +21,21 @@ public struct DateFieldInlinePresentationIntentModifier: AttributedStringModifie
         if fields.contains(field) {
             string.inlinePresentationIntent = inline
         }
+    }
+}
+
+public extension AttributedStringModifier {
+    @inlinable func modify(inline: InlinePresentationIntent, for fields: Set<AttributeScopes.FoundationAttributes.DateFieldAttribute.Field>) ->
+        MergeAttributedStringModifier<Self, DateFieldInlinePresentationIntentModifier>
+    {
+        let modifier = DateFieldInlinePresentationIntentModifier(fields: fields, inline: inline)
+        return merge(with: modifier)
+    }
+
+    @inlinable func modify(inline: InlinePresentationIntent, for field: AttributeScopes.FoundationAttributes.DateFieldAttribute.Field) ->
+        MergeAttributedStringModifier<Self, DateFieldInlinePresentationIntentModifier>
+    {
+        modify(inline: inline, for: [field])
     }
 }
 

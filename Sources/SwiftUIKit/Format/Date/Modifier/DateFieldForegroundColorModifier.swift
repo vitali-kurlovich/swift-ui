@@ -23,14 +23,26 @@ public struct DateFieldForegroundColorModifier: AttributedStringModifier {
     }
 }
 
-public extension FormatStyle where Self.FormatInput == Date, Self.FormatOutput == AttributedString {
+public extension AttributedStringModifier {
     @inlinable func modify(color: Color, for fields: Set<AttributeScopes.FoundationAttributes.DateFieldAttribute.Field>) ->
-
-        AttributedStringTransformerStyle<Date, Self, AttributedStringModifierTransformer<DateFieldForegroundColorModifier>>
-
+        MergeAttributedStringModifier<Self, DateFieldForegroundColorModifier>
     {
         let modifier = DateFieldForegroundColorModifier(fields: fields, color: color)
+        return merge(with: modifier)
+    }
 
+    @inlinable func modify(color: Color, for field: AttributeScopes.FoundationAttributes.DateFieldAttribute.Field) ->
+        MergeAttributedStringModifier<Self, DateFieldForegroundColorModifier>
+    {
+        modify(color: color, for: [field])
+    }
+}
+
+public extension FormatStyle where Self.FormatInput == Date, Self.FormatOutput == AttributedString {
+    @inlinable func modify(color: Color, for fields: Set<AttributeScopes.FoundationAttributes.DateFieldAttribute.Field>) ->
+        AttributedStringTransformerStyle<Date, Self, AttributedStringModifierTransformer<DateFieldForegroundColorModifier>>
+    {
+        let modifier = DateFieldForegroundColorModifier(fields: fields, color: color)
         return AttributedStringTransformerStyle(self, transformer: modifier.transformer())
     }
 

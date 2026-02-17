@@ -25,13 +25,9 @@ public extension Text {
 }
 
 #Preview {
-    let fontUpdater = DateFieldInlinePresentationIntentModifier(fields: [.year, .minute], inline: [.stronglyEmphasized])
-
-    let colorUpdater = DateFieldForegroundColorModifier(fields: [.year], color: .accentColor)
-
-    let colorUpdater2 = DateFieldForegroundColorModifier(fields: [.second], color: .pink)
-
-    let transform = fontUpdater.merge(with: colorUpdater).merge(with: colorUpdater2)
+    let colorModifier = DateFieldForegroundColorModifier(fields: [.year], color: .accentColor)
+        .modify(color: .pink, for: .second)
+        .modify(inline: .stronglyEmphasized, for: [.year, .minute])
 
     TimelineView(.periodic(from: .now, by: 1)) { context in
         Form {
@@ -39,7 +35,7 @@ public extension Text {
 
             Text(context.date, date: .abbreviated, time: .standard)
 
-            Text(context.date, date: .abbreviated, time: .standard, transform: transform)
+            Text(context.date, date: .abbreviated, time: .standard, transform: colorModifier)
         }.font(.title)
     }
 }

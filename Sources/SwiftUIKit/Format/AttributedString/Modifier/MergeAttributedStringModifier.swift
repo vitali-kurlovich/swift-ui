@@ -23,7 +23,7 @@ public struct MergeAttributedStringModifier<First, Second>: AttributedStringModi
 }
 
 public extension AttributedStringModifier {
-    func merge<U: AttributedStringModifier>(with updater: U) -> some AttributedStringModifier {
-        MergeAttributedStringModifier(self, updater)
+    func merge<M: AttributedStringModifier>(with modifier: M) -> MergeAttributedStringModifier<Self, M> {
+        MergeAttributedStringModifier(self, modifier)
     }
 }
