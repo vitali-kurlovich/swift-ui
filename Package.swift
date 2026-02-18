@@ -19,8 +19,8 @@ let package = Package(
         ),
 
         .library(
-            name: "SwiftUIKit",
-            targets: ["SwiftUIKit"]
+            name: "SwiftUIComponents",
+            targets: ["SwiftUIComponents"]
         ),
 
     ],
@@ -36,10 +36,11 @@ let package = Package(
         ),
 
         .target(
-            name: "SwiftUIKit",
+            name: "SwiftUIComponents",
             dependencies: [
                 "VisualEffects",
             ]
+
         ),
     ]
 )
