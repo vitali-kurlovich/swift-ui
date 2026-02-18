@@ -64,7 +64,7 @@ public extension IntegerFormatStyle {
     @inlinable func modify(color: Color, for numberPart: AttributeScopes.FoundationAttributes.NumberFormatAttributes.NumberPartAttribute.NumberPart) ->
         AttributedStringTransformerStyle<Self.FormatInput, Self.Attributed, AttributedStringModifierTransformer<NumberPartForegroundColorModifier>>
     {
-        attributed.modify(color: color, for: [numberPart])
+        modify(color: color, for: [numberPart])
     }
 }
 
@@ -78,7 +78,35 @@ public extension FloatingPointFormatStyle {
     @inlinable func modify(color: Color, for numberPart: AttributeScopes.FoundationAttributes.NumberFormatAttributes.NumberPartAttribute.NumberPart) ->
         AttributedStringTransformerStyle<Self.FormatInput, Self.Attributed, AttributedStringModifierTransformer<NumberPartForegroundColorModifier>>
     {
-        attributed.modify(color: color, for: [numberPart])
+        modify(color: color, for: [numberPart])
+    }
+}
+
+public extension FloatingPointFormatStyle.Currency {
+    @inlinable func modify(color: Color, for numberParts: Set<AttributeScopes.FoundationAttributes.NumberFormatAttributes.NumberPartAttribute.NumberPart>) ->
+        AttributedStringTransformerStyle<Self.FormatInput, FloatingPointFormatStyle.Attributed, AttributedStringModifierTransformer<NumberPartForegroundColorModifier>>
+    {
+        attributed.modify(color: color, for: numberParts)
+    }
+
+    @inlinable func modify(color: Color, for numberPart: AttributeScopes.FoundationAttributes.NumberFormatAttributes.NumberPartAttribute.NumberPart) ->
+        AttributedStringTransformerStyle<Self.FormatInput, FloatingPointFormatStyle.Attributed, AttributedStringModifierTransformer<NumberPartForegroundColorModifier>>
+    {
+        modify(color: color, for: [numberPart])
+    }
+}
+
+public extension FloatingPointFormatStyle.Percent {
+    @inlinable func modify(color: Color, for numberParts: Set<AttributeScopes.FoundationAttributes.NumberFormatAttributes.NumberPartAttribute.NumberPart>) ->
+        AttributedStringTransformerStyle<Self.FormatInput, FloatingPointFormatStyle.Attributed, AttributedStringModifierTransformer<NumberPartForegroundColorModifier>>
+    {
+        attributed.modify(color: color, for: numberParts)
+    }
+
+    @inlinable func modify(color: Color, for numberPart: AttributeScopes.FoundationAttributes.NumberFormatAttributes.NumberPartAttribute.NumberPart) ->
+        AttributedStringTransformerStyle<Self.FormatInput, FloatingPointFormatStyle.Attributed, AttributedStringModifierTransformer<NumberPartForegroundColorModifier>>
+    {
+        modify(color: color, for: [numberPart])
     }
 }
 
@@ -92,7 +120,7 @@ public extension Decimal.FormatStyle {
     @inlinable func modify(color: Color, for numberPart: AttributeScopes.FoundationAttributes.NumberFormatAttributes.NumberPartAttribute.NumberPart) ->
         AttributedStringTransformerStyle<Self.FormatInput, Self.Attributed, AttributedStringModifierTransformer<NumberPartForegroundColorModifier>>
     {
-        attributed.modify(color: color, for: [numberPart])
+        modify(color: color, for: [numberPart])
     }
 }
 
