@@ -1,7 +1,4 @@
 //
-//  SymbolForegroundColorModifier.swift
-//  swift-ui
-//
 //  Created by Vitali Kurlovich on 17.02.26.
 //
 

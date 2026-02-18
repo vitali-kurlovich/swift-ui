@@ -1,7 +1,4 @@
 //
-//  NumberPartInlinePresentationIntentModifier.swift
-//  swift-ui
-//
 //  Created by Vitali Kurlovich on 18.02.26.
 //
 
