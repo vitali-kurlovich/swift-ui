@@ -1,16 +1,11 @@
 //
-//  Gradient+Color.swift
-//  SwiftRandom
-//
 //  Created by Vitali Kurlovich on 26.11.25.
 //
 
 import SwiftUI
 
-@available(iOS 18.0, *)
-@available(macOS 15.0, *)
 public extension Gradient {
-    func interpolated(at position: CGFloat) -> Color {
+    func interpolated(at position: CGFloat, in colorSpace: Gradient.ColorSpace = .perceptual) -> Color {
         var iterator = stops.makeIterator()
 
         guard var last = iterator.next() else {
@@ -23,7 +18,7 @@ public extension Gradient {
             }
 
             if stop.location >= position {
-                return color(at: position, last: last, next: stop)
+                return color(at: position, last: last, next: stop, in: colorSpace)
             }
 
             last = stop
@@ -41,10 +36,8 @@ public extension Gradient {
     }
 }
 
-@available(iOS 18.0, *)
-@available(macOS 15.0, *)
 private extension Gradient {
-    func color(at position: CGFloat, last: Stop, next: Stop) -> Color {
+    func color(at position: CGFloat, last: Stop, next: Stop, in colorSpace: Gradient.ColorSpace) -> Color {
         if last.location == next.location {
             if position <= last.location {
                 return last.color
@@ -61,12 +54,10 @@ private extension Gradient {
         fraction = max(0, fraction)
         fraction = min(1, fraction)
 
-        return last.color.mix(with: next.color, by: fraction)
+        return last.color.mix(with: next.color, by: fraction, in: colorSpace)
     }
 }
 
-@available(iOS 18.0, *)
-@available(macOS 15.0, *)
 #Preview {
     let gradient = Gradient(colors: [.red, .yellow])
 

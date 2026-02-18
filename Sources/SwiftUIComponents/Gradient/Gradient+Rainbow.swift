@@ -1,7 +1,4 @@
 //
-//  Gradient+Rainbow.swift
-//  SwiftRandom
-//
 //  Created by Vitali Kurlovich on 28.11.25.
 //
 
