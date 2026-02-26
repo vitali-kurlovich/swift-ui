@@ -1,7 +1,4 @@
 //
-//  ColorEffectShaderModifier.swift
-//  swift-mathkit
-//
 //  Created by Vitali Kurlovich on 3.01.26.
 //
 
@@ -18,10 +15,10 @@ struct ColorEffectShaderModifier<Provider: ColorEffectShaderProvider>: ViewModif
     let isEnabled: Bool
 
     func body(content: Content) -> some View {
-        content.visualEffect { content, proxy in
+        content.visualEffect { content, _ in
             content
                 .colorEffect(
-                    provider.shader(proxy),
+                    provider.shader(),
                     isEnabled: isEnabled
                 )
         }

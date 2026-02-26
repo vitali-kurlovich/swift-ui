@@ -1,7 +1,4 @@
 //
-//  CheckerboardShapeStyle.swift
-//  swift-ui
-//
 //  Created by Vitali Kurlovich on 9.02.26.
 //
 

@@ -1,7 +1,4 @@
 //
-//  DistortionEffectShaderModifier.swift
-//  swift-mathkit
-//
 //  Created by Vitali Kurlovich on 3.01.26.
 //
 

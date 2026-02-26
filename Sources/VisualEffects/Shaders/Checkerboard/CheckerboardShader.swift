@@ -1,7 +1,4 @@
 //
-//  CheckerboardShader.swift
-//  swift-metalui
-//
 //  Created by Vitali Kurlovich on 21.01.26.
 //
 
@@ -35,14 +32,6 @@ public extension CheckerboardShader {
         self.init(checkSize: checkSize, origin: origin, secondColor: .colors(first, second), reverse: reverse)
     }
 }
-
-// extension CheckerboardShader: ShapeStyle {
-//
-// }
-
-//
-
-// func resolve(in environment: EnvironmentValues) -> Self.Resolved
 
 extension CheckerboardShader: ColorEffectShaderProvider {
     public var shaderLibrary: ShaderLibrary {
