@@ -1,0 +1,15 @@
+{
+  "originHash" : "5aa6806e9de8ac94799521a0a7ffd6ca5d27a0ea461e8eaebabade1e031d369a",
+  "pins" : [
+    {
+      "identity" : "swift-mathkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vitali-kurlovich/swift-mathkit.git",
+      "state" : {
+        "revision" : "9f0bb947f6d7ca2c156339e3b3fa3a5a02290dd0",
+        "version" : "0.0.10"
+      }
+    }
+  ],
+  "version" : 3
+}
