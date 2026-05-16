@@ -2,8 +2,8 @@
 //  Created by Kurlovich Vitali on 5/16/26.
 //
 
-import SwiftUI
 import MathKit
+import SwiftUI
 
 struct DoubleSideView<Front: View, Back: View>: View {
     var angle: Angle
@@ -12,10 +12,10 @@ struct DoubleSideView<Front: View, Back: View>: View {
     let anchor: UnitPoint
     let anchorZ: CGFloat
     let perspective: CGFloat
-    
-     let front: Front
-     let back: Back
-    
+
+    let front: Front
+    let back: Back
+
     var body: some View {
         content()
             .rotation3DEffect(
@@ -23,7 +23,7 @@ struct DoubleSideView<Front: View, Back: View>: View {
                 axis: axis,
                 anchor: anchor,
                 anchorZ: anchorZ,
-                perspective: perspective,
+                perspective: perspective
             ).brightness(brightnessValue)
     }
 }

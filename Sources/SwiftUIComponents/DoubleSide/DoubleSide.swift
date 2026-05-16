@@ -5,48 +5,45 @@
 import MathKit
 import SwiftUI
 
-
-public
-struct DoubleSide<Front: View, Back: View>: View {
+public struct DoubleSide<Front: View, Back: View>: View {
     @Binding
     private var side: Side
 
     private let front: Front
     private let back: Back
-    
+
     private let axis: (x: CGFloat, y: CGFloat, z: CGFloat)
     private let anchor: UnitPoint
     private let anchorZ: CGFloat
     private let perspective: CGFloat
-    
+
     private let reversed: Bool
 
     public init(_ side: Binding<Side>,
-         axis: (x: CGFloat, y: CGFloat, z: CGFloat) = (x: 0, y: 1, z:0),
-         anchor: UnitPoint = .center,
-         anchorZ: CGFloat = 0,
-         perspective: CGFloat = 0.333,
-         
-         reversed: Bool = false,
-         
-         @ViewBuilder front: () -> Front,
-         @ViewBuilder back: () -> Back)
+                axis: (x: CGFloat, y: CGFloat, z: CGFloat) = (x: 0, y: 1, z: 0),
+                anchor: UnitPoint = .center,
+                anchorZ: CGFloat = 0,
+                perspective: CGFloat = 0.333,
+
+                reversed: Bool = false,
+
+                @ViewBuilder front: () -> Front,
+                @ViewBuilder back: () -> Back)
     {
         _side = side
-        
+
         self.axis = axis
         self.anchor = anchor
         self.anchorZ = anchorZ
         self.perspective = perspective
-        
+
         self.reversed = reversed
-        
+
         self.front = front()
         self.back = back()
     }
 
     public var body: some View {
-        
         DoubleSideView(angle: angle,
                        axis: axis,
                        anchor: anchor,
@@ -54,27 +51,19 @@ struct DoubleSide<Front: View, Back: View>: View {
                        perspective: perspective,
                        front: front,
                        back: back)
-        
-        
     }
-    
-   
 }
 
-private
-extension DoubleSide {
+private extension DoubleSide {
     var angle: Angle {
         switch side {
         case .front:
-            return .degrees(0)
+            .degrees(0)
         case .back:
-            return  reversed ?  .degrees(-180) : .degrees(180)
+            reversed ? .degrees(-180) : .degrees(180)
         }
     }
 }
-
-
-
 
 #Preview {
     @Previewable
@@ -82,37 +71,35 @@ extension DoubleSide {
     var side: Side = .front
 
     HStack {
-        
         DoubleSide($side, front: {
             PreviewContent(color: .green, systemName: "moon.fill")
         }, back: {
             PreviewContent(color: .red, systemName: "star.fill")
-            
+
         })
-        
+
         DoubleSide($side, reversed: true, front: {
             PreviewContent(color: .purple, systemName: "moon.stars.fill")
         }, back: {
             PreviewContent(color: .mint, systemName: "sun.max.fill")
-            
+
         })
-        
+
         DoubleSide($side,
                    axis: (x: 1, y: 0, z: 0),
                    front: {
-            PreviewContent(color: .green, systemName: "moon.fill")
-        }, back: {
-            PreviewContent(color: .red, systemName: "star.fill")
-            
-        })
-        
+                       PreviewContent(color: .green, systemName: "moon.fill")
+                   }, back: {
+                       PreviewContent(color: .red, systemName: "star.fill")
+
+                   })
+
         DoubleSide($side, anchor: .trailing, front: {
             PreviewContent(color: .purple, systemName: "moon.stars.fill")
         }, back: {
             PreviewContent(color: .mint, systemName: "sun.max.fill")
-            
+
         })
-        
     }
     Button("Toggle") {
         withAnimation {
@@ -121,13 +108,10 @@ extension DoubleSide {
     }
 }
 
-
-
 struct PreviewContent: View {
     let color: Color
     let systemName: String
-    
-    
+
     var body: some View {
         RoundedRectangle(cornerRadius: 16)
             .fill(color)
@@ -142,5 +126,3 @@ struct PreviewContent: View {
                    height: 475 / 2)
     }
 }
-
-
