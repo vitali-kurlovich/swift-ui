@@ -72,32 +72,36 @@ private extension DoubleSide {
 
     HStack {
         DoubleSide($side, front: {
-            PreviewContent(color: .green, systemName: "moon.fill")
+            PreviewContent(color: .green, systemName: "moon.stars.fill")
         }, back: {
-            PreviewContent(color: .red, systemName: "star.fill")
+            PreviewContent(color: .red, systemName: "cloud.moon.fill")
+                .scaleEffect(x: -1)
 
         })
 
         DoubleSide($side, reversed: true, front: {
             PreviewContent(color: .purple, systemName: "moon.stars.fill")
         }, back: {
-            PreviewContent(color: .mint, systemName: "sun.max.fill")
+            PreviewContent(color: .mint, systemName: "cloud.moon.fill")
+                .scaleEffect(x: -1)
 
         })
 
         DoubleSide($side,
                    axis: (x: 1, y: 0, z: 0),
                    front: {
-                       PreviewContent(color: .green, systemName: "moon.fill")
+                       PreviewContent(color: .green, systemName: "moon.stars.fill")
                    }, back: {
-                       PreviewContent(color: .red, systemName: "star.fill")
+                       PreviewContent(color: .red, systemName: "cloud.moon.fill")
+                           .scaleEffect(y: -1)
 
                    })
 
         DoubleSide($side, anchor: .trailing, front: {
             PreviewContent(color: .purple, systemName: "moon.stars.fill")
         }, back: {
-            PreviewContent(color: .mint, systemName: "sun.max.fill")
+            PreviewContent(color: .mint, systemName: "cloud.moon.fill")
+                .scaleEffect(x: -1)
 
         })
     }
