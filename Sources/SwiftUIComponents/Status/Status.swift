@@ -4,22 +4,26 @@
 
 import SwiftUI
 
-struct Status<State: Equatable & CustomStringConvertible>: View {
+public struct Status<State: Equatable & CustomStringConvertible>: View {
     @Environment(\.self)
     private var environmentValues
 
-    private var style: any StatusStyle<State> {
-        environmentValues.statusStyle(State.self)
+    public let state: State
+
+    public init(state: State) {
+        self.state = state
     }
 
-    let state: State
-
-    var body: some View {
+    public var body: some View {
         AnyView(style.makeBody(configuration: configuration))
     }
 }
 
 private extension Status {
+    var style: any StatusStyle<State> {
+        environmentValues.statusStyle(State.self)
+    }
+
     var configuration: StateStyleConfiguration<State> {
         let indicator = Image(systemName: "circlebadge.fill")
         let label = Text(state.description)
