@@ -59,9 +59,9 @@ extension Color {
             let color = NSColor(name: nil) { appearance in
                 switch appearance.name {
                 case .aqua, .accessibilityHighContrastAqua, .accessibilityHighContrastVibrantLight:
-                    return NSColor(ciColor: CIColor(cgColor: container.light.cgColor))
+                    NSColor(ciColor: CIColor(cgColor: container.light.cgColor))
                 default:
-                    return NSColor(ciColor: CIColor(cgColor: container.dark.cgColor))
+                    NSColor(ciColor: CIColor(cgColor: container.dark.cgColor))
                 }
             }
 

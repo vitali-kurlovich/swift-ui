@@ -14,11 +14,6 @@ struct DisclosureIndicator<Indicator: View>: View {
     let isExpanded: Bool
     let indicator: () -> Indicator
 
-    init(isExpanded: Bool, indicator: @escaping () -> Indicator) {
-        self.isExpanded = isExpanded
-        self.indicator = indicator
-    }
-
     var body: some View {
         let indicator = DisclosureStyleConfiguration.Indicator(indicator())
 

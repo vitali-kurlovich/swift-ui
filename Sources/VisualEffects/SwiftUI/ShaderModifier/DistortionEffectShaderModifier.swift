@@ -5,7 +5,7 @@
 import SwiftUI
 
 public extension View {
-    func shaderEffect<Provider: DistortionEffectShaderProvider>(_ provider: Provider, isEnabled: Bool = true) -> some View {
+    func shaderEffect(_ provider: some DistortionEffectShaderProvider, isEnabled: Bool = true) -> some View {
         modifier(DistortionEffectShaderModifier(provider: provider, isEnabled: isEnabled))
     }
 }

@@ -5,7 +5,7 @@
 import SwiftUI
 
 public extension View {
-    func shaderEffect<Provider: ColorEffectShaderProvider>(_ provider: Provider, isEnabled: Bool = true) -> some View {
+    func shaderEffect(_ provider: some ColorEffectShaderProvider, isEnabled: Bool = true) -> some View {
         modifier(ColorEffectShaderModifier(provider: provider, isEnabled: isEnabled))
     }
 }

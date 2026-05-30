@@ -48,7 +48,9 @@ public extension SampleOffsetEffectShaderProvider {
 }
 
 public extension SampleOffsetEffectShaderProvider {
-    func maxSampleOffset(_: GeometryProxy) -> CGSize { .zero }
+    func maxSampleOffset(_: GeometryProxy) -> CGSize {
+        .zero
+    }
 }
 
 public protocol DistortionEffectShaderProvider: SampleOffsetEffectShaderProvider {}

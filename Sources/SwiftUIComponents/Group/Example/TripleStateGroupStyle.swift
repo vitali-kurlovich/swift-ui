@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum TripleState: Equatable, Sendable, CustomStringConvertible {
+enum TripleState: Equatable, CustomStringConvertible {
     case compact
     case expanded
     case details
@@ -15,33 +15,33 @@ enum TripleState: Equatable, Sendable, CustomStringConvertible {
     var description: String {
         switch self {
         case .compact:
-            return "Compact"
+            "Compact"
         case .expanded:
-            return "Expanded"
+            "Expanded"
         case .details:
-            return "Details"
+            "Details"
         }
     }
 
     var next: Self {
         switch self {
         case .compact:
-            return .expanded
+            .expanded
         case .expanded:
-            return .details
+            .details
         case .details:
-            return .compact
+            .compact
         }
     }
 
     var systemName: String {
         switch self {
         case .compact:
-            return "triangle"
+            "triangle"
         case .expanded:
-            return "diamond"
+            "diamond"
         case .details:
-            return "hexagon"
+            "hexagon"
         }
     }
 

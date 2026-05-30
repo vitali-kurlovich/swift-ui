@@ -5,9 +5,8 @@
 //  Created by Vitali Kurlovich on 9.02.26.
 //
 
-import VisualEffects
-
 import SwiftUI
+import VisualEffects
 
 public struct CheckerboardShapeStyle: ShapeStyle, Equatable {
     public typealias Configuration = CheckerboardConfiguration

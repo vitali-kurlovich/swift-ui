@@ -10,10 +10,6 @@ import SwiftUI
 struct AspectRatioLayout: Layout, Equatable {
     let aspectRatio: CGFloat
 
-    init(aspectRatio: CGFloat) {
-        self.aspectRatio = aspectRatio
-    }
-
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache _: inout ()) -> CGSize {
         guard let first = subviews.first else {
             return .zero

@@ -9,12 +9,7 @@ import SwiftUI
 
 struct DisclosureIndicatorWithBackgroundStyle<Background: View>: DisclosureIndicatorStyle {
     let padding: CGFloat
-    let background: () -> Background
-
-    init(padding: CGFloat, @ViewBuilder background: @escaping () -> Background) {
-        self.padding = padding
-        self.background = background
-    }
+    @ViewBuilder let background: () -> Background
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.indicator
@@ -48,7 +43,8 @@ struct IndicatorCircleBackgroundStyle<FillStyle: ShapeStyle>: DisclosureIndicato
 }
 
 extension DisclosureIndicatorStyle where Self == IndicatorCircleBackgroundStyle<Material> {
-    @MainActor static var ultraThinCircle: Self { IndicatorCircleBackgroundStyle(fillStyle: .ultraThin)
+    @MainActor static var ultraThinCircle: Self {
+        IndicatorCircleBackgroundStyle(fillStyle: .ultraThin)
     }
 }
 

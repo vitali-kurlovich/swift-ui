@@ -40,11 +40,11 @@ public extension FormatStyle where Self.FormatOutput == AttributedString {
 }
 
 public extension Text {
-    @inlinable init<F, T>(_ input: F.FormatInput, format: F, transform: T) where F: FormatStyle, F.FormatInput: Equatable, F.FormatOutput == AttributedString, T: AttributedStringTransformer {
+    @inlinable init<F>(_ input: F.FormatInput, format: F, transform: some AttributedStringTransformer) where F: FormatStyle, F.FormatInput: Equatable, F.FormatOutput == AttributedString {
         self.init(input, format: format.transform(transform))
     }
 
-    @inlinable init<F, M>(_ input: F.FormatInput, format: F, transform: M) where F: FormatStyle, F.FormatInput: Equatable, F.FormatOutput == AttributedString, M: AttributedStringModifier {
+    @inlinable init<F>(_ input: F.FormatInput, format: F, transform: some AttributedStringModifier) where F: FormatStyle, F.FormatInput: Equatable, F.FormatOutput == AttributedString {
         self.init(input, format: format.transform(transform))
     }
 }

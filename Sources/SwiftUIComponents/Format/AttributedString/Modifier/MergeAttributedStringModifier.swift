@@ -4,10 +4,7 @@
 
 import Foundation
 
-public struct MergeAttributedStringModifier<First, Second>: AttributedStringModifier
-    where
-    First: AttributedStringModifier, Second: AttributedStringModifier
-{
+public struct MergeAttributedStringModifier<First: AttributedStringModifier, Second: AttributedStringModifier>: AttributedStringModifier {
     public let first: First
     public let second: Second
 

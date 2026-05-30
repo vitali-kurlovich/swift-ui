@@ -8,11 +8,11 @@
 import Foundation
 
 public extension AttributedString {
-    func transform<T: AttributedStringTransformer>(_ transformer: T) -> AttributedString {
+    func transform(_ transformer: some AttributedStringTransformer) -> AttributedString {
         transformer.transform(self)
     }
 
-    func transform<T: AttributedStringModifier>(_ modifier: T) -> AttributedString {
+    func transform(_ modifier: some AttributedStringModifier) -> AttributedString {
         modifier.transformer().transform(self)
     }
 }

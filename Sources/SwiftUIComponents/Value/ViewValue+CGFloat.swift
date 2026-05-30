@@ -21,18 +21,18 @@ public extension ViewValue where BaseType == CGFloat {
         func value(_ traitCollection: UITraitCollection) -> BaseType {
             switch self {
             case let .fixed(value):
-                return value
+                value
             case let .dynamic(value):
-                return UIFontMetrics.default.scaledValue(for: value, compatibleWith: traitCollection)
+                UIFontMetrics.default.scaledValue(for: value, compatibleWith: traitCollection)
             }
         }
     #else
         func value(_: DynamicTypeSize) -> BaseType {
             switch self {
             case let .fixed(value):
-                return value
+                value
             case let .dynamic(value):
-                return value
+                value
             }
         }
     #endif

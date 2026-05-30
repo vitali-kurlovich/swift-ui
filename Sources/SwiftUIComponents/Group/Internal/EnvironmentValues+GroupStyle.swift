@@ -8,7 +8,9 @@
 import SwiftUI
 
 private struct StateGroupStyleEnvironmentKey<State: Equatable>: EnvironmentKey {
-    static var defaultValue: any StateGroupStyle<State> { DefaultStateGroupStyle<State>() }
+    static var defaultValue: any StateGroupStyle<State> {
+        DefaultStateGroupStyle<State>()
+    }
 }
 
 extension EnvironmentValues {

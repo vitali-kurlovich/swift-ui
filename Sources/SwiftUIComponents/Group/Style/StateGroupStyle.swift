@@ -27,7 +27,7 @@ public struct StateGroupStyleConfiguration<State: Equatable> {
 
         let storge: AnyView
 
-        init<V: View>(_ view: V) {
+        init(_ view: some View) {
             storge = AnyView(view)
         }
     }
@@ -40,7 +40,7 @@ public struct StateGroupStyleConfiguration<State: Equatable> {
 
         let storge: AnyView
 
-        init<V: View>(_ view: V) {
+        init(_ view: some View) {
             storge = AnyView(view)
         }
     }

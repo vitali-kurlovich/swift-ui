@@ -31,7 +31,7 @@ public struct DisclosureStyleConfiguration {
 
         let storge: AnyView
 
-        init<V: View>(_ view: V) {
+        init(_ view: some View) {
             storge = AnyView(view)
         }
     }
@@ -41,19 +41,12 @@ public struct DisclosureStyleConfiguration {
     public let isExpanded: Bool
 }
 
-private struct IndicatorStyleEnvironmentKey: EnvironmentKey {
-    static let defaultValue: any DisclosureIndicatorStyle = DefaultDisclosureIndicatorStyle()
-}
-
 extension EnvironmentValues {
-    var indicatorStyle: any DisclosureIndicatorStyle {
-        get { self[IndicatorStyleEnvironmentKey.self] }
-        set { self[IndicatorStyleEnvironmentKey.self] = newValue }
-    }
+    @Entry var indicatorStyle: any DisclosureIndicatorStyle = DefaultDisclosureIndicatorStyle()
 }
 
 public extension View {
-    func disclosureIndicatorStyle<S: DisclosureIndicatorStyle>(_ style: S) -> some View {
+    func disclosureIndicatorStyle(_ style: some DisclosureIndicatorStyle) -> some View {
         environment(\.indicatorStyle, style)
     }
 }

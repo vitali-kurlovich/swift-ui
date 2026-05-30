@@ -7,9 +7,7 @@
 
 import Foundation
 
-public struct MergeAttributedStringTransformer<First, Second>: AttributedStringTransformer where
-    First: AttributedStringTransformer, Second: AttributedStringTransformer
-{
+public struct MergeAttributedStringTransformer<First: AttributedStringTransformer, Second: AttributedStringTransformer>: AttributedStringTransformer {
     public let first: First
     public let second: Second
 
@@ -24,7 +22,7 @@ public struct MergeAttributedStringTransformer<First, Second>: AttributedStringT
 }
 
 public extension AttributedStringTransformer {
-    func merge<T: AttributedStringTransformer>(with transformer: T) -> some AttributedStringTransformer {
+    func merge(with transformer: some AttributedStringTransformer) -> some AttributedStringTransformer {
         MergeAttributedStringTransformer(self, transformer)
     }
 }

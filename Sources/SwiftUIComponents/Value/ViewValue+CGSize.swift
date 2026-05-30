@@ -36,9 +36,9 @@ public extension ViewValue where BaseType == CGSize {
         func value(_: DynamicTypeSize) -> BaseType {
             switch self {
             case let .fixed(value):
-                return value
+                value
             case let .dynamic(value):
-                return value
+                value
             }
         }
 

@@ -15,11 +15,11 @@ public extension Text {
 }
 
 public extension Text {
-    @inlinable init<T>(_ input: Date, format: Date.FormatStyle, transform: T) where T: AttributedStringModifier {
+    @inlinable init(_ input: Date, format: Date.FormatStyle, transform: some AttributedStringModifier) {
         self.init(input, format: format.attributedStyle, transform: transform)
     }
 
-    @inlinable init<T>(_ input: Date, date: Date.FormatStyle.DateStyle, time: Date.FormatStyle.TimeStyle, transform: T) where T: AttributedStringModifier {
+    @inlinable init(_ input: Date, date: Date.FormatStyle.DateStyle, time: Date.FormatStyle.TimeStyle, transform: some AttributedStringModifier) {
         self.init(input, format: Date.FormatStyle(date: date, time: time), transform: transform)
     }
 }
