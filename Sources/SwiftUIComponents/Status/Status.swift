@@ -1,0 +1,31 @@
+//
+//  Created by Kurlovich Vitali on 5/30/26.
+//
+
+import SwiftUI
+
+struct Status<State: Equatable & CustomStringConvertible>: View {
+    @Environment(\.self)
+    private var environmentValues
+
+    private var style: any StatusStyle<State> {
+        environmentValues.statusStyle(State.self)
+    }
+
+    let state: State
+
+    var body: some View {
+        AnyView(style.makeBody(configuration: configuration))
+    }
+}
+
+private extension Status {
+    var configuration: StateStyleConfiguration<State> {
+        let indicator = Image(systemName: "circlebadge.fill")
+        let label = Text(state.description)
+
+        return StateStyleConfiguration<State>(indicator: .init(indicator),
+                                              label: .init(label),
+                                              state: state)
+    }
+}
