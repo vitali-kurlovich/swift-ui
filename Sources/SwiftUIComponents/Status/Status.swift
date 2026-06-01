@@ -24,12 +24,12 @@ private extension Status {
         environmentValues.statusStyle(State.self)
     }
 
-    var configuration: StateStyleConfiguration<State> {
+    var configuration: StatusStyleConfiguration<State> {
         let indicator = Image(systemName: "circlebadge.fill")
         let label = Text(state.description).lineLimit(1)
 
-        return StateStyleConfiguration<State>(indicator: .init(indicator),
-                                              label: .init(label),
-                                              state: state)
+        return StatusStyleConfiguration<State>(indicator: .init(indicator),
+                                               label: .init(label),
+                                               state: state)
     }
 }

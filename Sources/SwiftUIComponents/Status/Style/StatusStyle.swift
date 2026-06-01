@@ -10,10 +10,10 @@ public protocol StatusStyle<State>: Sendable {
 
     @ViewBuilder @MainActor func makeBody(configuration: Self.Configuration) -> Self.Body
 
-    typealias Configuration = StateStyleConfiguration<State>
+    typealias Configuration = StatusStyleConfiguration<State>
 }
 
-public struct StateStyleConfiguration<State: Equatable> {
+public struct StatusStyleConfiguration<State: Equatable> {
     @MainActor
     public struct Label: View {
         public var body: AnyView {
@@ -40,8 +40,8 @@ public struct StateStyleConfiguration<State: Equatable> {
         }
     }
 
-    public let indicator: StateStyleConfiguration<State>.Indicator
-    public let label: StateStyleConfiguration<State>.Label
+    public let indicator: StatusStyleConfiguration<State>.Indicator
+    public let label: StatusStyleConfiguration<State>.Label
 
     public let state: State
 }

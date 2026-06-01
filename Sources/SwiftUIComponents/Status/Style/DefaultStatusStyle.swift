@@ -13,7 +13,7 @@ public struct DefaultStatusStyle<Resolver: StatusIndicatorColorResolver>: Status
         self.resolver = resolver
     }
 
-    public func makeBody(configuration: StateStyleConfiguration<State>) -> some View {
+    public func makeBody(configuration: StatusStyleConfiguration<State>) -> some View {
         HStack {
             configuration.indicator
                 .foregroundStyle(resolver.resolveColor(for: configuration.state).gradient)
@@ -31,7 +31,7 @@ public struct DefaultStatusCompactStyle<Resolver: StatusIndicatorColorResolver>:
         self.resolver = resolver
     }
 
-    public func makeBody(configuration: StateStyleConfiguration<State>) -> some View {
+    public func makeBody(configuration: StatusStyleConfiguration<State>) -> some View {
         configuration.indicator
             .foregroundStyle(resolver.resolveColor(for: configuration.state).gradient)
     }
@@ -47,7 +47,7 @@ public struct DefaultStatusGlassStyle<Resolver: StatusIndicatorColorResolver>: S
         self.resolver = resolver
     }
 
-    public func makeBody(configuration: StateStyleConfiguration<State>) -> some View {
+    public func makeBody(configuration: StatusStyleConfiguration<State>) -> some View {
         HStack {
             configuration.indicator
                 .foregroundStyle(resolver.resolveColor(for: configuration.state).gradient)
@@ -69,7 +69,7 @@ public struct DefaultStatusCompactGlassStyle<Resolver: StatusIndicatorColorResol
         self.resolver = resolver
     }
 
-    public func makeBody(configuration: StateStyleConfiguration<State>) -> some View {
+    public func makeBody(configuration: StatusStyleConfiguration<State>) -> some View {
         configuration.indicator
             .foregroundStyle(resolver.resolveColor(for: configuration.state).gradient)
             .padding(.all, 5)
