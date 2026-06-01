@@ -26,7 +26,7 @@ private extension Status {
 
     var configuration: StateStyleConfiguration<State> {
         let indicator = Image(systemName: "circlebadge.fill")
-        let label = Text(state.description)
+        let label = Text(state.description).lineLimit(1)
 
         return StateStyleConfiguration<State>(indicator: .init(indicator),
                                               label: .init(label),
