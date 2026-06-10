@@ -4,10 +4,12 @@
 
 import SwiftUI
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 public protocol VisualEffectShaderProvider: Sendable {
     var shaderLibrary: ShaderLibrary { get }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 public extension VisualEffectShaderProvider {
     var shaderLibrary: ShaderLibrary {
         .default
@@ -20,6 +22,7 @@ public extension VisualEffectShaderProvider {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 public protocol ColorEffectShaderProvider: VisualEffectShaderProvider {
     func shader() -> Shader
 
@@ -27,6 +30,7 @@ public protocol ColorEffectShaderProvider: VisualEffectShaderProvider {
     func compile() async throws
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 public extension ColorEffectShaderProvider {
     @available(iOS 18.0, macOS 15.0, *)
     func compile() async throws {
@@ -34,6 +38,7 @@ public extension ColorEffectShaderProvider {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 public protocol SampleOffsetEffectShaderProvider: VisualEffectShaderProvider {
     func shader(_ proxy: GeometryProxy) -> Shader
 
@@ -44,6 +49,7 @@ public protocol SampleOffsetEffectShaderProvider: VisualEffectShaderProvider {
     func compile() async throws
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 public extension SampleOffsetEffectShaderProvider {
     @available(macOS 15.0, *)
     func compile() async throws {
@@ -51,12 +57,15 @@ public extension SampleOffsetEffectShaderProvider {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 public extension SampleOffsetEffectShaderProvider {
     func maxSampleOffset(_: GeometryProxy) -> CGSize {
         .zero
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 public protocol DistortionEffectShaderProvider: SampleOffsetEffectShaderProvider {}
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 public protocol LayerEffectShaderProvider: SampleOffsetEffectShaderProvider {}

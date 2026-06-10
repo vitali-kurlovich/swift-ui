@@ -4,6 +4,7 @@
 
 import SwiftUI
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 public struct CheckerboardShapeStyle: ShapeStyle, Equatable {
     public var checkSize: CGSize
     public var origin: UnitPoint
@@ -24,12 +25,14 @@ public struct CheckerboardShapeStyle: ShapeStyle, Equatable {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 public extension CheckerboardShapeStyle {
     init(checkSize: CGFloat, origin: UnitPoint = .zero, first: Color = .primary, second: Color = .secondary) {
         self.init(checkSize: CGSize(width: checkSize, height: checkSize), origin: origin, first: first, second: second)
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 #Preview {
     Circle().fill(CheckerboardShapeStyle(checkSize: 20))
 }

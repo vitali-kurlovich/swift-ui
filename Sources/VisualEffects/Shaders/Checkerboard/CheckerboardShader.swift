@@ -4,6 +4,7 @@
 
 import SwiftUI
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 public struct CheckerboardShader: Sendable, Equatable {
     public enum ColorConfiguration: Equatable, Sendable {
         case opacity(CGFloat)
@@ -24,6 +25,7 @@ public struct CheckerboardShader: Sendable, Equatable {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 public extension CheckerboardShader {
     init(checkSize: CGSize,
          origin: UnitPoint = .center,
@@ -33,6 +35,7 @@ public extension CheckerboardShader {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 extension CheckerboardShader: ColorEffectShaderProvider {
     public var shaderLibrary: ShaderLibrary {
         ShaderLibrary.bundle(Bundle.module)
