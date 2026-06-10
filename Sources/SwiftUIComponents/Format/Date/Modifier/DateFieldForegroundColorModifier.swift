@@ -51,6 +51,7 @@ public extension FormatStyle where Self.FormatInput == Date, Self.FormatOutput =
     }
 }
 
+@available(iOS 18.0, macOS 15.0, *)
 public extension Date.FormatStyle {
     @inlinable func modify(color: Color, for fields: Set<AttributeScopes.FoundationAttributes.DateFieldAttribute.Field>) ->
 
@@ -67,6 +68,7 @@ public extension Date.FormatStyle {
     }
 }
 
+@available(iOS 18.0, macOS 15.0, *)
 #Preview {
     let format = Date.FormatStyle()
         .attributedStyle

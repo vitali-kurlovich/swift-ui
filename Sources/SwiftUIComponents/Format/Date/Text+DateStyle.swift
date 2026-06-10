@@ -14,6 +14,7 @@ public extension Text {
     }
 }
 
+@available(iOS 18.0, macOS 15.0, *)
 public extension Text {
     @inlinable init(_ input: Date, format: Date.FormatStyle, transform: some AttributedStringModifier) {
         self.init(input, format: format.attributedStyle, transform: transform)
@@ -24,6 +25,7 @@ public extension Text {
     }
 }
 
+@available(iOS 18.0, macOS 15.0, *)
 #Preview {
     let colorModifier = DateFieldForegroundColorModifier(fields: [.year], color: .accentColor)
         .modify(color: .pink, for: .second)

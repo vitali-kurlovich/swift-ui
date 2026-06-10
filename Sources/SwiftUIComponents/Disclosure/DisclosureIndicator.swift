@@ -1,7 +1,4 @@
 //
-//  DisclosureIndicator.swift
-//  swift-ui
-//
 //  Created by Vitali Kurlovich on 7.02.26.
 //
 
@@ -74,6 +71,7 @@ extension DisclosureIndicator where Indicator == Image {
     }
 }
 
+@available(iOS 18.0, macOS 15.0, *)
 #Preview {
     @Previewable @State var isExpanded = false
 

@@ -4,6 +4,7 @@
 
 import SwiftUI
 
+@available(iOS 18.0, macOS 15.0, *)
 public extension Gradient {
     func interpolated(at position: CGFloat, in colorSpace: Gradient.ColorSpace = .perceptual) -> Color {
         var iterator = stops.makeIterator()
@@ -37,6 +38,7 @@ public extension Gradient {
 }
 
 private extension Gradient {
+    @available(iOS 18.0, macOS 15.0, *)
     func color(at position: CGFloat, last: Stop, next: Stop, in colorSpace: Gradient.ColorSpace) -> Color {
         if last.location == next.location {
             if position <= last.location {
@@ -58,6 +60,7 @@ private extension Gradient {
     }
 }
 
+@available(iOS 18.0, macOS 15.0, *)
 #Preview {
     let gradient = Gradient(colors: [.red, .yellow])
 

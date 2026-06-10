@@ -37,7 +37,7 @@ public struct DefaultStatusCompactStyle<Resolver: StatusIndicatorColorResolver>:
     }
 }
 
-@available(iOS 26.0, *)
+@available(iOS 26.0, macOS 26.0, *)
 public struct DefaultStatusGlassStyle<Resolver: StatusIndicatorColorResolver>: StatusStyle, Equatable {
     public typealias State = Resolver.State
 
@@ -58,8 +58,7 @@ public struct DefaultStatusGlassStyle<Resolver: StatusIndicatorColorResolver>: S
     }
 }
 
-@available(iOS 26.0, *)
-
+@available(iOS 26.0, macOS 26.0, *)
 public struct DefaultStatusCompactGlassStyle<Resolver: StatusIndicatorColorResolver>: StatusStyle, Equatable {
     public typealias State = Resolver.State
 

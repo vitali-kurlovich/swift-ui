@@ -39,6 +39,7 @@ public extension FormatStyle where Self.FormatOutput == AttributedString {
     }
 }
 
+@available(iOS 18.0, macOS 15.0, *)
 public extension Text {
     @inlinable init<F>(_ input: F.FormatInput, format: F, transform: some AttributedStringTransformer) where F: FormatStyle, F.FormatInput: Equatable, F.FormatOutput == AttributedString {
         self.init(input, format: format.transform(transform))

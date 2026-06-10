@@ -65,6 +65,7 @@ private extension DoubleSide {
     }
 }
 
+@available(iOS 18.0, macOS 15.0, *)
 #Preview {
     @Previewable
     @State
@@ -112,6 +113,7 @@ private extension DoubleSide {
     }
 }
 
+@available(iOS 18.0, macOS 15.0, *)
 struct PreviewContent: View {
     let color: Color
     let systemName: String

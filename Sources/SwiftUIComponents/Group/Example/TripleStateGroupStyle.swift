@@ -50,6 +50,7 @@ enum TripleState: Equatable, CustomStringConvertible {
     }
 }
 
+@available(iOS 18.0, macOS 15.0, *)
 struct TripleStateGroupStyle: StateGroupStyle {
     typealias State = TripleState
 

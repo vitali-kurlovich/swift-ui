@@ -162,6 +162,7 @@ public extension Decimal.FormatStyle {
     }
 }
 
+@available(iOS 18.0, macOS 15.0, *)
 #Preview {
     let format = IntegerFormatStyle<Int>()
         .attributed

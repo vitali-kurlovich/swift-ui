@@ -36,7 +36,7 @@ private extension PreviewStatusCollection {
                     DefaultStatusStyle(resolver)
                 )
 
-            if #available(iOS 26.0, *) {
+            if #available(iOS 26.0, macOS 26.0, *) {
                 rowHorizontal(title: "DefaultStatusStyle")
                     .statusStyle(
                         DefaultStatusGlassStyle(resolver)
@@ -48,7 +48,7 @@ private extension PreviewStatusCollection {
                     DefaultStatusStyle(resolver)
                 )
 
-            if #available(iOS 26.0, *) {
+            if #available(iOS 26.0, macOS 26.0, *) {
                 row(title: "DefaultStatusStyle")
                     .statusStyle(
                         DefaultStatusGlassStyle(resolver)
@@ -61,7 +61,7 @@ private extension PreviewStatusCollection {
                 DefaultStatusCompactStyle(resolver)
             )
 
-        if #available(iOS 26.0, *) {
+        if #available(iOS 26.0, macOS 26.0, *) {
             rowHorizontal(title: "DefaultStatusCompactGlassStyle")
                 .statusStyle(
                     DefaultStatusCompactGlassStyle(resolver)
