@@ -24,7 +24,7 @@ let package = Package(
 
     ],
     dependencies: [
-        .package(url: "https://github.com/vitali-kurlovich/swift-mathkit.git", from: "0.0.10"),
+        .package(url: "https://github.com/vitali-kurlovich/swift-mathkit.git", from: "0.0.11"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
