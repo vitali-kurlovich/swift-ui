@@ -8,6 +8,7 @@
 import SwiftUI
 import VisualEffects
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 public extension View {
     func checkerboard(_ configuration: CheckerboardConfiguration = .medium(),
                       opacity: CGFloat = 0.3,
@@ -31,6 +32,7 @@ public extension View {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 struct CheckerboardShaderModifier: ViewModifier {
     typealias Configuration = CheckerboardConfiguration
 
@@ -45,6 +47,7 @@ struct CheckerboardShaderModifier: ViewModifier {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 extension CheckerboardShaderModifier {
     private var shader: CheckerboardShader {
         let checkSize = configuration.resolveSize(dynamicTypeSize)
@@ -57,6 +60,7 @@ extension CheckerboardShaderModifier {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 #Preview {
     @Previewable @State var reverse = false
     VStack {

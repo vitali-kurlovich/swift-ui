@@ -5,6 +5,7 @@
 import MathKit
 import SwiftUI
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 struct DoubleSideView<Front: View, Back: View>: View {
     var angle: Angle
 
@@ -28,6 +29,7 @@ struct DoubleSideView<Front: View, Back: View>: View {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 extension DoubleSideView: @MainActor Animatable {
     var animatableData: Angle.AnimatableData {
         get {
@@ -39,6 +41,7 @@ extension DoubleSideView: @MainActor Animatable {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 private extension DoubleSideView {
     @ViewBuilder
     func content() -> some View {
@@ -51,6 +54,7 @@ private extension DoubleSideView {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 private extension DoubleSideView {
     var brightnessValue: Double {
         let br = abs(dot)

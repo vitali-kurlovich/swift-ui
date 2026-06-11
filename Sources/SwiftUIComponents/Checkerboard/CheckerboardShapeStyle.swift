@@ -1,13 +1,11 @@
 //
-//  CheckerboardShapeStyle.swift
-//  swift-ui
-//
 //  Created by Vitali Kurlovich on 9.02.26.
 //
 
 import SwiftUI
 import VisualEffects
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 public struct CheckerboardShapeStyle: ShapeStyle, Equatable {
     public typealias Configuration = CheckerboardConfiguration
 
@@ -32,6 +30,7 @@ public struct CheckerboardShapeStyle: ShapeStyle, Equatable {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 public extension ShapeStyle where Self == CheckerboardShapeStyle {
     static func checkerboard(
         _ configuration: CheckerboardConfiguration = .medium(),
@@ -42,6 +41,7 @@ public extension ShapeStyle where Self == CheckerboardShapeStyle {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 #Preview {
     Circle().fill(.checkerboard(.small()))
     Circle().fill(.checkerboard())

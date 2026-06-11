@@ -1,7 +1,4 @@
 //
-//  DisclosureIndicatorWithBackgroundStyle.swift
-//  swift-ui
-//
 //  Created by Vitali Kurlovich on 9.02.26.
 //
 
@@ -48,6 +45,7 @@ extension DisclosureIndicatorStyle where Self == IndicatorCircleBackgroundStyle<
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 #Preview {
     @Previewable @State var isExpanded = false
 

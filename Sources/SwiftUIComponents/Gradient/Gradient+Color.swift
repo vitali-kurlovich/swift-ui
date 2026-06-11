@@ -29,6 +29,7 @@ public extension Gradient {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 public extension Gradient {
     func containsTransparent(_ environment: EnvironmentValues) -> Bool {
         stops.contains {

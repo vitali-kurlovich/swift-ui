@@ -5,6 +5,7 @@
 import MathKit
 import SwiftUI
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 extension Angle {
     var side: Side {
         CGVector(dx: 1, dy: 0)

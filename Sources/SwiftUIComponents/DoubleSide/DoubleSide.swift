@@ -5,6 +5,7 @@
 import MathKit
 import SwiftUI
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 public struct DoubleSide<Front: View, Back: View>: View {
     @Binding
     private var side: Side
@@ -54,6 +55,7 @@ public struct DoubleSide<Front: View, Back: View>: View {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 private extension DoubleSide {
     var angle: Angle {
         switch side {

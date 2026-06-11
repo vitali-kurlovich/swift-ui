@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 extension Color: @retroactive Encodable {
     public func encode(to encoder: any Encoder) throws {
         let container = ColorContainer(color: self)
@@ -14,6 +15,7 @@ extension Color: @retroactive Encodable {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 extension Color: @retroactive Decodable {
     public init(from decoder: any Decoder) throws {
         let container = try ColorContainer(from: decoder)
@@ -21,11 +23,13 @@ extension Color: @retroactive Decodable {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 struct ColorContainer: Codable {
     let light: Color.Resolved
     let dark: Color.Resolved
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 extension ColorContainer {
     init(color: Color) {
         var environmentValues = EnvironmentValues()
@@ -40,6 +44,7 @@ extension ColorContainer {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 extension Color {
     init(_ container: ColorContainer) {
         #if canImport(UIKit)

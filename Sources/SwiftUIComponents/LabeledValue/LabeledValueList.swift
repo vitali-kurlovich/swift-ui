@@ -4,6 +4,7 @@
 
 import SwiftUI
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 public struct LabeledValueList: View {
     let labels: [LabeledValue]
 
@@ -40,6 +41,7 @@ public struct LabeledValueList: View {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 private struct GroupOfPeopleRows: TableRowContent {
     let labels: [LabeledValue]
 
@@ -56,6 +58,7 @@ private struct GroupOfPeopleRows: TableRowContent {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 #Preview {
     LabeledValueList(labels: LabeledValue.moc)
 }

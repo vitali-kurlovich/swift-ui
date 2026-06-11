@@ -8,6 +8,7 @@
 import SwiftUI
 import VisualEffects
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 public struct Checkerboard: View, Equatable {
     public typealias Configuration = CheckerboardConfiguration
 
@@ -28,6 +29,7 @@ public struct Checkerboard: View, Equatable {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 #Preview {
     Checkerboard(.small())
     Checkerboard(.medium())
