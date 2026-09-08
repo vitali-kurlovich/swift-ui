@@ -2,13 +2,11 @@
 //  Created by Kurlovich Vitali on 5/16/26.
 //
 
-import MathKit
 import SwiftUI
 
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 public struct DoubleSide<Front: View, Back: View>: View {
-    @Binding
-    private var side: Side
+    private let side: Side
 
     private let front: Front
     private let back: Back
@@ -20,7 +18,7 @@ public struct DoubleSide<Front: View, Back: View>: View {
 
     private let reversed: Bool
 
-    public init(_ side: Binding<Side>,
+    public init(_ side: Side,
                 axis: (x: CGFloat, y: CGFloat, z: CGFloat) = (x: 0, y: 1, z: 0),
                 anchor: UnitPoint = .center,
                 anchorZ: CGFloat = 0,
@@ -31,7 +29,7 @@ public struct DoubleSide<Front: View, Back: View>: View {
                 @ViewBuilder front: () -> Front,
                 @ViewBuilder back: () -> Back)
     {
-        _side = side
+        self.side = side
 
         self.axis = axis
         self.anchor = anchor
@@ -74,7 +72,7 @@ private extension DoubleSide {
     var side: Side = .front
 
     HStack {
-        DoubleSide($side, front: {
+        DoubleSide(side, front: {
             PreviewContent(color: .green, systemName: "moon.stars.fill")
         }, back: {
             PreviewContent(color: .red, systemName: "cloud.moon.fill")
@@ -82,7 +80,7 @@ private extension DoubleSide {
 
         })
 
-        DoubleSide($side, reversed: true, front: {
+        DoubleSide(side, reversed: true, front: {
             PreviewContent(color: .purple, systemName: "moon.stars.fill")
         }, back: {
             PreviewContent(color: .mint, systemName: "cloud.moon.fill")
@@ -90,7 +88,7 @@ private extension DoubleSide {
 
         })
 
-        DoubleSide($side,
+        DoubleSide(side,
                    axis: (x: 1, y: 0, z: 0),
                    front: {
                        PreviewContent(color: .green, systemName: "moon.stars.fill")
@@ -100,7 +98,7 @@ private extension DoubleSide {
 
                    })
 
-        DoubleSide($side, anchor: .trailing, front: {
+        DoubleSide(side, anchor: .trailing, front: {
             PreviewContent(color: .purple, systemName: "moon.stars.fill")
         }, back: {
             PreviewContent(color: .mint, systemName: "cloud.moon.fill")

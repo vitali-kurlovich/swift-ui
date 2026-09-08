@@ -2,7 +2,7 @@
 //  Created by Kurlovich Vitali on 5/16/26.
 //
 
-import MathKit
+import CGMathKit
 import SwiftUI
 
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
