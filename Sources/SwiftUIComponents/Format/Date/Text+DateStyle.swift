@@ -39,5 +39,6 @@ public extension Text {
 
             Text(context.date, date: .abbreviated, time: .standard, transform: colorModifier)
         }.font(.title)
+            .safeAreaPadding()
     }
 }

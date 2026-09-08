@@ -24,7 +24,7 @@ let package = Package(
 
     ],
     dependencies: [
-        .package(url: "https://github.com/vitali-kurlovich/swift-mathkit.git", from: "0.0.11"),
+        .package(url: "https://github.com/vitali-kurlovich/swift-mathkit.git", from: "0.16.0"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -41,7 +41,7 @@ let package = Package(
             name: "SwiftUIComponents",
             dependencies: [
                 "VisualEffects",
-                .product(name: "MathKit", package: "swift-mathkit"),
+                .product(name: "CGMathKit", package: "swift-mathkit"),
             ]
 
         ),
